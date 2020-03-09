@@ -19,3 +19,23 @@ Mask:
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+net = input('Input subnet address (x.x.x.x/x): ')
+subnet = net[:(net.find('/'))].split('.')
+#print(subnet)
+mask = net[(net.find('/')):]
+mask_bin = int(mask[1:])*'1' + (32-int(mask[1:]))*'0'
+#print(mask)
+output = '''
+Network:
+{:<8}  {:<8}  {:<8}  {:<8}
+{:08b}  {:08b}  {:08b}  {:08b}
+
+Mask:
+{}
+{:<8}  {:<8}  {:<8}  {:<8}
+{}  {}  {}  {}
+'''
+print(output.format(int(subnet[0]),int(subnet[1]),int(subnet[2]),int(subnet[3]),\
+                    int(subnet[0]),int(subnet[1]),int(subnet[2]),int(subnet[3]),mask,\
+                    int(mask_bin[:8],2),int(mask_bin[8:16],2),int(mask_bin[16:24],2),int(mask_bin[24:],2),\
+                    mask_bin[:8],mask_bin[8:16],mask_bin[16:24],mask_bin[24:]))
